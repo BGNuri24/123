@@ -1,0 +1,24 @@
+#pragma once
+#include <vector>
+
+struct MazeStep {
+    int row;
+    int col;
+};
+
+class MazeData {
+public:
+    explicit MazeData(int size);
+    ~MazeData();
+    MazeData(const MazeData&) = delete;
+    MazeData& operator=(const MazeData&) = delete;
+
+    int size() const;
+    char cell(int r, int c) const;   // '#' wall, '.' path, 'E' exit
+    const std::vector<MazeStep>& generationSteps() const;
+private:
+    void carve(int r, int c);
+    int n;
+    char** grid;
+    std::vector<MazeStep> steps;
+};
